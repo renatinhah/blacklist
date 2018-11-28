@@ -9,12 +9,6 @@ class EntityBlacklist extends DBClass{
     public function __construct(){
     }
 
-    // public function __construct($id, $cpf, $name){
-    //    $this->id = $id;
-    //    $this->cpf = $cpf;
-    //    $this->name = $name;
-    // }
-
     public function getId(){
         return $this->id;
     }

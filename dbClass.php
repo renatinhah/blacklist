@@ -23,7 +23,4 @@ class DBClass {
     }
 }
 
-// $teste = new DBClass();
-// $teste->getInstance();
-
 ?>

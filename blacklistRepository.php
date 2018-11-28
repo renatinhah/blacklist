@@ -66,7 +66,3 @@ class BlacklistRepository extends EntityBlacklist{
         return $stm->execute();
     }
 }
-
-// $teste = new BlacklistRepository();
-// var_dump($teste->update("09752788602", "renata dias")); die;
-// var_dump($teste->findAll()); die;

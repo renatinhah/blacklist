@@ -1,9 +1,4 @@
 <?php
-	// $host = "localhost";
-	// $username = "root";
-	// $password = "root";
-	// $database = "maxmilhas";
-
 	// $urlPadrao = 'https://127.0.0.1:3000';
 
 	define('HOST', 'localhost');

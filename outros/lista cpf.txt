@@ -1,0 +1,36 @@
+84854946601
+54978035988
+37647507664
+06703651655
+32761328779
+35895743218
+41532408854
+01531427154
+18587571346
+01129682102
+
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '84854946601', 'renata um');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '54978035988', 'maria dez');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '37647507664', 'maria dois');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '06703651655', 'maria tres');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '32761328779', 'maria quatro');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '35895743218', 'maria cinco');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '41532408854', 'maria seis');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '01531427154', 'maria sete');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '18587571346', 'maria oito');
+INSERT INTO `blacklist` (`id`, `cpf`, `name`) VALUES (NULL, '01129682102', 'maria nove');
+
+https://www.geradorcpf.com/
+
+848.549.466-01
+549.780.359-88
+376.475.076-64
+067.036.516-55
+327.613.287-79
+358.957.432-18
+415.324.088-54
+015.314.271-54
+185.875.713-46
+011.296.821-02
+
+
