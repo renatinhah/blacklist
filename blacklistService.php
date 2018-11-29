@@ -11,7 +11,6 @@ class BlacklistService extends BlacklistRepository{
 		        extract($records);
 		        array_push($blacklist, $records);
 		    }
-		    // var_dump(json_encode($blacklist));
 		}
 		return $blacklist;
 	}
@@ -44,14 +43,8 @@ class BlacklistService extends BlacklistRepository{
     }
    
     public function insert($cpf, $name){
-        $stmt = BlacklistRepository::findByName($cpf, $name);
-    	if($inseriu){
-    		return http_response_code(200);
-    	} else {
-    		return http_response_code(503);
-    	} if($dadosincorrestos){
-    		return http_response_code(400);
-    	}
+        $stmt = BlacklistRepository::insert($cpf, $name);
+    	return $stmt;
     }
 
     public function update($cpf, $name){
@@ -76,11 +69,5 @@ class BlacklistService extends BlacklistRepository{
     	} else {
     		return http_response_code(503);
     	}
-
     }
 }
-// $teste = new BlacklistService();
-// $teste->findByCpf('01531427154');
-// $teste->findById('50');
-// $teste->findByName('renata');
-// $teste->findAll();

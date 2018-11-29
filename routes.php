@@ -3,6 +3,11 @@
 
 require_once "blacklistService.php";
 
+//verifica se a api está sendo testada via browser ou endpoint
+if(!empty($cpf)){ 
+	$_GET['cpf'] = $cpf;
+}
+
 if(!empty($_GET['cpf']) && validateCPF($_GET['cpf'])) {
 	$cpf = $_GET['cpf'];
 	$cpf = str_replace(".", "", $cpf);
@@ -12,43 +17,92 @@ if(!empty($_GET['cpf']) && validateCPF($_GET['cpf'])) {
  	$blacklist = $service->findByCpf($cpf);
 	
 	if(empty($blacklist)) {
-		response(200,"Free",NULL);
+		$response = response(200,"Free", $cpf);
 	} else {
-		response(200,"Blocked", $cpf);
+		$response = response(200,"Blocked", $cpf);
 	}
+
 } else {
-	response(400,"Invalid Request",NULL);
+	$response = response(400,"Invalid", NULL);
 }
 
-function response($status,$status_message,$data){
+if(isset($browser)){
+	$cpfStatus = $response['status_message'];
+} else {
+	$json_response = json_encode($response);
+	echo $json_response;
+}
+
+
+function insert($cpf, $name){
+	if(validateCPF($cpf) && !empty($name)){
+		$service = new BlacklistService();
+ 		$blacklist = $service->insert($cpf, $name);
+	} else {
+		return http_response_code(400);
+	}
+
+	if(isset($blacklist)){
+		return http_response_code(200);
+	} else {
+		return http_response_code(503);
+	}
+}
+
+public function logicDelete($id){
+
+}
+
+public function delete($id){
+
+}
+
+function response($status, $status_message, $data){
 	header("HTTP/1.1 ".$status);
 	
 	$response['status'] = $status;
 	$response['status_message'] = $status_message;
 	$response['data'] = $data;
 
-	$json_response = json_encode($response);
-	echo $json_response;
+	return $response;
 }
 
 function validateCPF($cpf){	
-    $cpf = preg_replace('/[^0-9]/', '', (string) $cpf);
-    if (strlen($cpf) != 11){
-        return false;
-    }
-    for ($i = 0, $j = 10, $soma = 0; $i < 9; $i++, $j--){
-        $soma += $cpf{$i} * $j;
-    }
-    $resto = $soma % 11;
-    if ($cpf{9} != ($resto < 2 ? 0 : 11 - $resto)){
-        return false;
-    }
-    for ($i = 0, $j = 11, $soma = 0; $i < 10; $i++, $j--){
-        $soma += $cpf{$i} * $j;
-    }
-    $resto = $soma % 11;
-    return $cpf{10} == ($resto < 2 ? 0 : 11 - $resto);
+	if(empty($cpf)) {
+		return false;
+	}
+
+	$cpf = preg_replace("/[^0-9]/", "", $cpf);
+	$cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
+	
+	if (strlen($cpf) != 11) {
+		return false;
+	} else if ($cpf == '00000000000' || 
+		$cpf == '11111111111' || 
+		$cpf == '22222222222' || 
+		$cpf == '33333333333' || 
+		$cpf == '44444444444' || 
+		$cpf == '55555555555' || 
+		$cpf == '66666666666' || 
+		$cpf == '77777777777' || 
+		$cpf == '88888888888' || 
+		$cpf == '99999999999') {
+		return false;
+
+	 } else {   
+		for ($t = 9; $t < 11; $t++) {
+			for ($d = 0, $c = 0; $c < $t; $c++) {
+				$d += $cpf{$c} * (($t + 1) - $c);
+			}
+			$d = ((10 * $d) % 11) % 10;
+			if ($cpf{$c} != $d) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
 
 
 
